@@ -57,11 +57,11 @@ public class Parser {
     }
 
     public String toCSV(List<NodeList> testo) {
-        
+
         List lista1 = new ArrayList();
-        List lista2 = new ArrayList();
+
         lista1 = getText(testo.get(0), "td");
-        
+
         String stringa = "";
 
         stringa += lista1.get(0) + ";";
@@ -69,7 +69,9 @@ public class Parser {
         stringa += lista1.get(2) + ";";
         stringa += lista1.get(3) + "\r\n";
 
+        List lista2 = new ArrayList();
         for (int i = 1; i < testo.size() - 1; i = i + 2) {
+
             lista1 = getText(testo.get(i), "td");
             lista2 = getText(testo.get(i + 1), "td");
 
@@ -83,14 +85,14 @@ public class Parser {
     }
 
     public List getText(NodeList nodelist, String tag) {
-        List testp = new ArrayList();
+        List testo = new ArrayList();
 
         if (nodelist != null && nodelist.getLength() > 0) {
-            testp.add(nodelist.item(0).getTextContent());
-            testp.add(nodelist.item(1).getTextContent());
-            testp.add(nodelist.item(2).getTextContent());
-            testp.add(nodelist.item(3).getTextContent());
+            testo.add(nodelist.item(0).getTextContent());
+            testo.add(nodelist.item(1).getTextContent());
+            testo.add(nodelist.item(2).getTextContent());
+            testo.add(nodelist.item(3).getTextContent());
         }
-        return testp;
+        return testo;
     }
 }
