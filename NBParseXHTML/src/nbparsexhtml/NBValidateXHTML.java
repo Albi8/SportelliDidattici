@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
  *
- * @author scuola
+ * @author limonta_alberto
  */
 public class NBValidateXHTML {
 
@@ -25,25 +26,19 @@ public class NBValidateXHTML {
      * @param args the command line arguments
      */
     public static void main(String[] args)  {
-        List libri = null;
-        Parser dom = new Parser();
+         List<NodeList> tabella = null;
+        Parser pars = new Parser();
+        myFile file = new myFile();
         try {
-            libri = dom.parseDocument("sito.xml");
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(NBValidateXHTML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(NBValidateXHTML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(NBValidateXHTML.class.getName()).log(Level.SEVERE, null, ex);
+            tabella = pars.parseDocument("circolare.xml");
+            String CSV = pars.toCSV(tabella);
+          
+            
+            file.write("contenuto.csv", CSV);
+            
+        } catch (ParserConfigurationException | SAXException | IOException exception) {
+            System.out.println("Errore!");
         }
-
-        // iterazione della lista e visualizzazione degli oggetti
-        System.out.println("Numero di libri: " + libri.size());
-        Iterator iterator = libri.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next().toString());
-        }
-
     }
 
 }
