@@ -30,7 +30,14 @@ public class NBValidateXHTML {
         Parser pars = new Parser();
         myFile file = new myFile();
         try {
-            tabella = pars.parseDocument("circolare.xml");
+            
+            String costanti = file.read("costanti.csv");
+            
+            String[] cost= costanti.split(";");
+            
+            
+
+            tabella = pars.parseDocument("circolare.xml",cost[1]);
             String CSV = pars.toCSV(tabella);
           
             
